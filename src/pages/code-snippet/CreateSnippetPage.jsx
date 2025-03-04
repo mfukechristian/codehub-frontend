@@ -15,13 +15,17 @@ const CreateSnippetPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createSnippet({
+      const result = await createSnippet({
         title,
         language,
         description,
         code,
       }).unwrap();
-      navigate("/code-snippet");
+
+      // Small delay to ensure cache invalidation completes
+      setTimeout(() => {
+        navigate("/code-snippet", { replace: true });
+      }, 100);
     } catch (err) {
       alert(err?.data?.message || err.error);
     }
