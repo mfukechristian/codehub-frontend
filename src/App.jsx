@@ -1,13 +1,13 @@
 import HeaderComponent from "./components/header/HeaderComponent";
 import FooterComponent from "./components/footer/FooterComponent";
-import HomePage from "./pages/home/homePage";
+import { Outlet } from "react-router-dom";
 
 const App = () => {
   return (
     <>
       <HeaderComponent />
       <main>
-        <HomePage />
+        <Outlet />
       </main>
       <FooterComponent />
     </>
