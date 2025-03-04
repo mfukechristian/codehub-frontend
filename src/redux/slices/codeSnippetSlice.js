@@ -7,6 +7,11 @@ export const codeSnippetSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getCodeSnippets: builder.query({
       query: () => CODE_SNIPPETS_URL,
+      providesTags: ["CodeSnippet"],
+    }),
+    getCodeSnippetById: builder.query({
+      query: (id) => `${CODE_SNIPPETS_URL}/${id}`,
+      providesTags: ["CodeSnippet"],
     }),
     createCodeSnippet: builder.mutation({
       query: (snippetData) => ({
@@ -14,6 +19,7 @@ export const codeSnippetSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: snippetData,
       }),
+      invalidatesTags: ["CodeSnippet"],
     }),
     updateCodeSnippet: builder.mutation({
       query: ({ id, snippetData }) => ({
@@ -21,12 +27,14 @@ export const codeSnippetSlice = apiSlice.injectEndpoints({
         method: "PUT",
         body: snippetData,
       }),
+      invalidatesTags: ["CodeSnippet"],
     }),
     deleteCodeSnippet: builder.mutation({
       query: (id) => ({
         url: `${CODE_SNIPPETS_URL}/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["CodeSnippet"],
     }),
   }),
 });
@@ -34,6 +42,7 @@ export const codeSnippetSlice = apiSlice.injectEndpoints({
 // Export hooks for usage in functional components
 export const {
   useGetCodeSnippetsQuery,
+  useGetCodeSnippetByIdQuery,
   useCreateCodeSnippetMutation,
   useUpdateCodeSnippetMutation,
   useDeleteCodeSnippetMutation,
