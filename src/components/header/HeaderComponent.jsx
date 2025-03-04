@@ -1,23 +1,33 @@
-import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { FaGear } from "react-icons/fa6";
+import logo from "../../assets/logo.png";
 import "./HeaderComponent.css";
 
 const HeaderComponent = () => {
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   return (
     <header className="header">
       <div className="header-left">
-        <div className="logo-placeholder">LOGO</div>
+        <img
+          src={logo}
+          alt="CodeHub Logo"
+          className="logo"
+          onClick={() => navigate("/")}
+        />
       </div>
       <div className="header-right">
-        {isAuthenticated ? (
+        {userInfo ? (
           <div className="user-info">
-            <span>Hi {user?.name}</span>
-            <span className="settings-icon">⚙️</span>
+            <span>Hi, {userInfo.name}</span>
+            <FaGear className="settings-icon" />
           </div>
         ) : (
-          <button className="login-button">Login</button>
+          <button className="login-button" onClick={() => navigate("/login")}>
+            Login
+          </button>
         )}
       </div>
     </header>
