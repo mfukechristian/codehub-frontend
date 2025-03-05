@@ -30,7 +30,7 @@ const HeaderComponent = () => {
           src={logo}
           alt="CodeHub Logo"
           className="logo"
-          onClick={() => navigate("/")}
+          onClick={() => navigate(userInfo ? "/code-snippet" : "/")}
         />
       </div>
       <div className="header-right">

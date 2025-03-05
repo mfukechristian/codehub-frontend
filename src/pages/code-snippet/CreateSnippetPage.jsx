@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCreateCodeSnippetMutation } from "../../redux/slices/codeSnippetSlice";
+import { programmingLanguages } from "../../data/languages";
 import "./CreateSnippetPage.css";
 
 const CreateSnippetPage = () => {
@@ -47,13 +48,19 @@ const CreateSnippetPage = () => {
         </div>
 
         <div className="form-group">
-          <input
-            type="text"
-            placeholder="Programming Language"
+          <select
             value={language}
             onChange={(e) => setLanguage(e.target.value)}
             required
-          />
+            className="language-select"
+          >
+            <option value="">Select Language</option>
+            {programmingLanguages.map((lang) => (
+              <option key={lang} value={lang}>
+                {lang}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="form-group">
